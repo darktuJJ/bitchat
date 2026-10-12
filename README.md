@@ -2,121 +2,121 @@
 
 ## bitchat
 
-A decentralized peer-to-peer messaging app with dual transport architecture: local Bluetooth mesh networks for offline communication and internet-based Nostr protocol for global reach. No accounts, no phone numbers, no central servers. It's the side-groupchat.
+一款去中心化的点对点消息应用，采用双传输架构：本地蓝牙 Mesh 网络用于离线通信，基于互联网的 Nostr 协议用于全球通信。无需账号、无需手机号、没有中心服务器。它就是那个“小群聊”。
 
 [bitchat.free](http://bitchat.free)
 
 📲 [App Store](https://apps.apple.com/us/app/bitchat-mesh/id6748219622)
 
-## License
+## 许可证
 
-This project is released into the public domain. See the [LICENSE](LICENSE) file for details.
+本项目已发布到公有领域。详情请参阅 [LICENSE](LICENSE) 文件。
 
-## Features
+## 功能特性
 
-- **Dual Transport Architecture**: Bluetooth mesh for offline + Nostr protocol for internet-based messaging
-- **Location-Based Channels**: Geographic chat rooms using geohash coordinates over global Nostr relays
-- **Intelligent Message Routing**: Automatically chooses best transport (Bluetooth → Nostr fallback)
-- **Decentralized Mesh Network**: Automatic peer discovery and multi-hop message relay over Bluetooth LE
-- **Privacy First**: No accounts, no phone numbers, no persistent identifiers
-- **Private Message End-to-End Encryption**: [Noise Protocol](https://noiseprotocol.org) for mesh, NIP-17 for Nostr
-- **IRC-Style Commands**: Familiar `/slap`, `/msg`, `/who` style interface
-- **Universal App**: Native support for iOS and macOS
-- **Emergency Wipe**: Triple-tap to instantly clear all data
-- **Performance Optimizations**: LZ4 message compression, adaptive battery modes, and optimized networking
+- **双传输架构**：蓝牙 Mesh 用于离线通信 + Nostr 协议用于互联网消息
+- **基于位置的频道**：通过全球 Nostr 中继、使用 geohash 坐标的地理聊天室
+- **智能消息路由**：自动选择最佳传输方式（蓝牙 → Nostr 回退）
+- **去中心化 Mesh 网络**：基于低功耗蓝牙（Bluetooth LE）的自动节点发现和多跳消息中继
+- **隐私优先**：无账号、无手机号、无持久标识符
+- **私信端到端加密**：Mesh 使用 [Noise Protocol](https://noiseprotocol.org)，Nostr 使用 NIP-17
+- **IRC 风格命令**：熟悉的 `/slap`、`/msg`、`/who` 风格界面
+- **通用应用**：原生支持 iOS 和 macOS
+- **紧急擦除**：三击即可立即清除所有数据
+- **性能优化**：LZ4 消息压缩、自适应省电模式和优化的网络处理
 
-## [Technical Architecture](https://deepwiki.com/permissionlesstech/bitchat)
+## [技术架构](https://deepwiki.com/permissionlesstech/bitchat)
 
-BitChat uses a **hybrid messaging architecture** with two complementary transport layers:
+BitChat 采用**混合消息架构**，包含两个互补的传输层：
 
-### Bluetooth Mesh Network (Offline)
+### 蓝牙 Mesh 网络（离线）
 
-- **Local Communication**: Direct peer-to-peer within Bluetooth range
-- **Multi-hop Relay**: Messages route through nearby devices (max 7 hops)
-- **No Internet Required**: Works completely offline in disaster scenarios
-- **Noise Protocol Encryption**: End-to-end encryption with forward secrecy
-- **Binary Protocol**: Compact packet format optimized for Bluetooth LE constraints
-- **Automatic Discovery**: Peer discovery and connection management
-- **Adaptive Power**: Battery-optimized duty cycling
+- **本地通信**：在蓝牙范围内直接点对点通信
+- **多跳中继**：消息经由附近设备转发（最多 7 跳）
+- **无需互联网**：在灾难场景下完全离线可用
+- **Noise Protocol 加密**：具备前向保密的端到端加密
+- **二进制协议**：针对低功耗蓝牙限制优化的紧凑数据包格式
+- **自动发现**：节点发现与连接管理
+- **自适应功耗**：针对电池优化的占空比调度
 
-### Nostr Protocol (Internet)
+### Nostr 协议（互联网）
 
-- **Global Reach**: Connect with users worldwide via internet relays
-- **Location Channels**: Geographic chat rooms using geohash coordinates
-- **290+ Relay Network**: Distributed across the globe for reliability
-- **NIP-17 Encryption**: Gift-wrapped private messages for internet privacy
-- **Ephemeral Keys**: Fresh cryptographic identity per geohash area
+- **全球覆盖**：通过互联网中继与全球用户连接
+- **位置频道**：使用 geohash 坐标的地理聊天室
+- **290+ 中继网络**：分布于全球，保障可靠性
+- **NIP-17 加密**：采用 gift-wrap 封装的私信，保护互联网隐私
+- **临时密钥**：每个 geohash 区域使用全新的加密身份
 
-### Channel Types
+### 频道类型
 
 #### `mesh #bluetooth`
 
-- **Transport**: Bluetooth Low Energy mesh network
-- **Scope**: Local devices within multi-hop range
-- **Internet**: Not required
-- **Use Case**: Offline communication, protests, disasters, remote areas
+- **传输方式**：低功耗蓝牙 Mesh 网络
+- **范围**：多跳范围内的本地设备
+- **互联网**：不需要
+- **适用场景**：离线通信、抗议活动、灾难、偏远地区
 
-#### Location Channels (`block #dr5rsj7`, `neighborhood #dr5rs`, `country #dr`)
+#### 位置频道（`block #dr5rsj7`、`neighborhood #dr5rs`、`country #dr`）
 
-- **Transport**: Nostr protocol over internet
-- **Scope**: Geographic areas defined by geohash precision
-  - `block` (7 chars): City block level
-  - `neighborhood` (6 chars): District/neighborhood
-  - `city` (5 chars): City level
-  - `province` (4 chars): State/province
-  - `region` (2 chars): Country/large region
-- **Internet**: Required (connects to Nostr relays)
-- **Use Case**: Location-based community chat, local events, regional discussions
+- **传输方式**：基于互联网的 Nostr 协议
+- **范围**：由 geohash 精度定义的地理区域
+  - `block`（7 个字符）：街区级别
+  - `neighborhood`（6 个字符）：区/社区
+  - `city`（5 个字符）：城市级别
+  - `province`（4 个字符）：州/省
+  - `region`（2 个字符）：国家/大区域
+- **互联网**：需要（连接到 Nostr 中继）
+- **适用场景**：基于位置的社区聊天、本地活动、区域讨论
 
-### Direct Message Routing
+### 私信路由
 
-Private messages use **intelligent transport selection**:
+私信采用**智能传输选择**：
 
-1. **Bluetooth First** (preferred when available)
+1. **蓝牙优先**（可用时首选）
 
-   - Direct connection with established Noise session
-   - Fastest and most private option
+   - 通过已建立的 Noise 会话直接连接
+   - 最快、最私密的方式
 
-2. **Nostr Fallback** (when Bluetooth unavailable)
+2. **Nostr 回退**（蓝牙不可用时）
 
-   - Uses recipient's Nostr public key
-   - NIP-17 gift-wrapping for privacy
-   - Routes through global relay network
+   - 使用接收方的 Nostr 公钥
+   - 采用 NIP-17 gift-wrap 保护隐私
+   - 经由全球中继网络路由
 
-3. **Smart Queuing** (when neither available)
-   - Messages queued until transport becomes available
-   - Automatic delivery when connection established
+3. **智能排队**（两者都不可用时）
+   - 消息排队等待，直到有可用的传输方式
+   - 连接建立后自动投递
 
-For detailed protocol documentation, see the [Technical Whitepaper](WHITEPAPER.md).
+详细的协议文档请参阅[技术白皮书](WHITEPAPER.md)。
 
-## Setup
+## 安装配置
 
-### Option 1: Using Xcode
+### 方式一：使用 Xcode
 
    ```bash
    cd bitchat
    open bitchat.xcodeproj
    ```
 
-   To run on a device there're a few steps to prepare the code:
-   - Clone the local configs: `cp Configs/Local.xcconfig.example Configs/Local.xcconfig`
-   - Add your Developer Team ID into the newly created `Configs/Local.xcconfig`
-      - Bundle ID would be set to `chat.bitchat.<team_id>` (unless you set to something else)
-   - Entitlements need to be updated manually (TODO: Automate):
-      - Search and replace `group.chat.bitchat` with `group.<your_bundle_id>` (e.g. `group.chat.bitchat.ABC123`)
+   要在真机上运行，需要先做几步准备：
+   - 复制本地配置：`cp Configs/Local.xcconfig.example Configs/Local.xcconfig`
+   - 在新建的 `Configs/Local.xcconfig` 中填入你的开发者团队 ID（Developer Team ID）
+      - Bundle ID 将被设置为 `chat.bitchat.<team_id>`（除非你另行设置）
+   - Entitlements 需要手动更新（TODO：自动化）：
+      - 搜索并将 `group.chat.bitchat` 替换为 `group.<your_bundle_id>`（例如 `group.chat.bitchat.ABC123`）
 
-### Option 2: Using `just`
+### 方式二：使用 `just`
 
    ```bash
    brew install just
    ```
 
-Want to try this on macos: `just run` will set it up and run from source.
-Run `just clean` afterwards to restore things to original state for mobile app building and development.
+想在 macOS 上试用：`just run` 会完成配置并从源码运行。
+之后运行 `just clean`，即可恢复到原始状态，以便进行移动端应用的构建和开发。
 
-## Localization
+## 本地化
 
-- Base app resources live under `bitchat/Localization/Base.lproj/`. Add new copy to `Localizable.strings` and plural rules to `Localizable.stringsdict`.
-- Share extension strings are separate in `bitchatShareExtension/Localization/Base.lproj/Localizable.strings`.
-- Prefer keys that describe intent (`app_info.features.offline.title`) and reuse existing ones where possible.
-- Run `xcodebuild -project bitchat.xcodeproj -scheme "bitchat (macOS)" -configuration Debug CODE_SIGNING_ALLOWED=NO build` to compile-check any localization updates.
+- 应用的基础资源位于 `bitchat/Localization/Base.lproj/`。新文案添加到 `Localizable.strings`，复数规则添加到 `Localizable.stringsdict`。
+- 分享扩展的字符串单独存放在 `bitchatShareExtension/Localization/Base.lproj/Localizable.strings`。
+- 优先使用能描述意图的键名（`app_info.features.offline.title`），并尽可能复用已有的键。
+- 运行 `xcodebuild -project bitchat.xcodeproj -scheme "bitchat (macOS)" -configuration Debug CODE_SIGNING_ALLOWED=NO build`，对本地化更新进行编译检查。
